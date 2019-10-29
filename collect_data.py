@@ -50,11 +50,9 @@ class PythonPackagesCollector:
         if response.status_code == 200:
             etree_obj = fromstring(response.text)
 
-            self.release_numbers_and_urls = [(x.text.strip(), x.get('href')) for x in
-                                             etree_obj.xpath(self.RELEASE_AND_URL)]
+            self.release_numbers_and_urls = [(x.text.strip(), x.get('href')) for x in etree_obj.xpath(self.RELEASE_AND_URL)]
 
-            self.release_dates = [parse(x) for x in etree_obj.xpath(self.RELEASE_DATE) if
-                                  'release date' not in x.lower()]
+            self.release_dates = [parse(x) for x in etree_obj.xpath(self.RELEASE_DATE) if 'release date' not in x.lower()]
 
     def build_proper_urls(self):
         """
